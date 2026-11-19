@@ -1,0 +1,5 @@
+gitpython
+pydantic
+pytest
+tree-sitter
+tree-sitter-python
