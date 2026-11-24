@@ -24,10 +24,11 @@ class PromptBuilder:
     Function: {context.function_name}
     Source Code: {context.source_code}
     IMPORTANT: The function belongs to module: {context.module_name}
-    Use: from {context.import_path} import {context.class_name}
+    Use: from {context.module_name} import {context.class_name}
     when generating tests. Do not invent import paths. Do not use solution.py
     Generate complete executable unit tests.
     """
+        # Rakesh=  Use: from {context.import_path} import {context.class_name}
         return prompt
         
 

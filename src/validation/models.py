@@ -7,3 +7,4 @@ class ValidateTestResult(BaseModel):
     stdout: str
     stderr: str
     error_type: str
+    failure_log: str

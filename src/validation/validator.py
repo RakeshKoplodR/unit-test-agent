@@ -15,11 +15,14 @@ class TestValidator:
             test_file
         )
 
+        failure_log = execution.stdout if execution.stdout else execution.stderr
+
         return ValidateTestResult(
             success=execution.returncode == 0,
             test_file=test_file,
             exit_code=execution.returncode,
             stdout=execution.stdout,
             stderr=execution.stderr,
-            error_type=execution.stderr
+            error_type=execution.stderr,
+            failure_log=failure_log
         )
