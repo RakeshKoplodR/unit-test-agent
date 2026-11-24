@@ -20,10 +20,14 @@ class InventoryBuilder:
                 all_functions.append(
                     InventoryFunction(
                         file_path=result.file_path,
+                        module_name=func.module_name,
+                        import_path=func.import_path,
+                        class_name=func.class_name,
                         name=func.name,
                         parameters=func.parameters,
                         start_line=func.start_line,
-                        end_line=func.end_line
+                        end_line=func.end_line,
+                        source_code=func.source_code
                     )
                 )
 

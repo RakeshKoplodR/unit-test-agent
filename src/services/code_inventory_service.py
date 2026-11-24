@@ -4,17 +4,18 @@ from src.inventory.inventory_builder import InventoryBuilder
 
 class CodeInventoryService:
 
-    def generate_inventory(self, language, source_files):
+    def generate_inventory(self, language, source_files, repo_root):
 
         parser = ParserFactory.get_parser(language=language)
         parse_results = []
 
         for file in source_files:
             try:
-                result = parser.parse(file)
+                result = parser.parse(file, repo_root)
                 parse_results.append(result)
             except Exception as exception:
-                print(f"Failed: {file}")
+                print(f"Failed ====> {file}")
+                print(f"Exception =====> {exception}")
 
         inventory = (
             InventoryBuilder()

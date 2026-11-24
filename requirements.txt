@@ -3,3 +3,9 @@ pydantic
 pytest
 tree-sitter
 tree-sitter-python
+langchain
+langchain-openai
+openai
+python-dotenv
+langchain-aws
+boto3

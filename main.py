@@ -3,6 +3,11 @@ from src.repo_loader.loader import RepositoryLoader
 from src.language_detector.language_detector import LanguageDetector
 from src.services.code_inventory_service import CodeInventoryService
 from src.services.framework_service import FrameworkService
+from src.services.test_generation_service import TestGenerationService
+from dotenv import load_dotenv
+from src.services.validation_service import ValidateService
+
+load_dotenv()
 
 def main():
 
@@ -32,7 +37,8 @@ def main():
 
     inventory = service.generate_inventory(
         language=language_detector_result.primary_language,
-        source_files=language_detector_result.source_files
+        source_files=language_detector_result.source_files,
+        repo_root=repo_info.local_path
     )
 
     framework_service = FrameworkService()
@@ -47,6 +53,23 @@ def main():
     stats = inventory.get_statistics()
     print(stats)
 
+    test_service = TestGenerationService()
+    test_service.generate_tests(
+        inventory=inventory,
+        framework=framework,
+        repo_path=repo_info.local_path
+    )
+
+    print("\n")
+    print("STEP 6 :- TEST VALIDATION")
+
+    validation_service = ValidateService()
+    results = validation_service.validate(repo_path=repo_info.local_path)
+    for result in results:
+        print(f"{result.test_file}")
+        print(f"\n Success: {result.success}")
+        if not result.success:
+            print(result.stderr)
 
 
 if __name__=="__main__":

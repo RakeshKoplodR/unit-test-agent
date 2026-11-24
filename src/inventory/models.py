@@ -2,8 +2,12 @@ from pydantic import BaseModel, Field
 
 class InventoryFunction(BaseModel):
     file_path: str
+    module_name: str
+    class_name: str | None = None
+    import_path: str
     name: str
     parameters: list[str]
+    source_code: str
     start_line: int
     end_line: int
 
